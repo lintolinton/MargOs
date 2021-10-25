@@ -6,7 +6,7 @@ print:
     ;convert to ascii
     ;val is 
     pusha
-    mov ax, 4 ;the position of starting nibble
+    mov ax, 3 ;the shifting position of starting nibble
     loop:
         call isolate_nibble ;return nibble in cx
         call to_ascii ; return ascii char in bx
@@ -21,8 +21,11 @@ print:
 
 isolate_nibble:
     pusha
-    ; dx == 0x1f32
-    
+    ;example if dx == 0x1f32
+    mov cx, dx
+    and cx, 0xf000 ; dx now 0x1000
+    shr dx, ax ;shift 0xf000 3 places right to get 0x000f
+
 
 
 
